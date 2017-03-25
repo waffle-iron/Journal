@@ -15,20 +15,18 @@ class MainWindow : public QMainWindow
 	Q_OBJECT
 
 protected:
-	void closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;
 
 private slots:
-	void open();
-	void save();
 	void penColor();
 	void penWidth();
 	void about();
 
+	void on_actionMove_triggered();
+
+	void on_actionPaint_triggered();
+
 private:
 	Paper *paper;
-
-	bool maybeSave();
-	bool saveFile(const QByteArray &fileFormat);
 
 public:
 	explicit MainWindow(QWidget *parent = 0);
