@@ -37,20 +37,8 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
-   <addaction name="actionPaint"/>
-   <addaction name="actionMove"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
-  <action name="actionPaint">
-   <property name="text">
-    <string>Paint</string>
-   </property>
-  </action>
-  <action name="actionMove">
-   <property name="text">
-    <string>Move</string>
-   </property>
-  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>

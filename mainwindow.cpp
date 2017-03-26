@@ -8,6 +8,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	ui(new Ui::MainWindow)
 {
 	ui->setupUi(this);
+	//this->setStyleSheet("background-color: #f8f8f8;");
 	paper = new Paper();
 	ui->graphicsView->setScene(paper);
 	ui->graphicsView->setSceneRect(QRectF(0, 0, 800, 600));
@@ -42,14 +43,4 @@ void MainWindow::about()
 {
 	QMessageBox::about(this, tr("About Scribble"),
 			tr("<p>The <b>Journal</b> app is a notes taking app inspired heavily by Microsoft OneNote.</p>"));
-}
-
-void MainWindow::on_actionMove_triggered()
-{
-	paper->setMoving(true);
-}
-
-void MainWindow::on_actionPaint_triggered()
-{
-	paper->setMoving(false);
 }

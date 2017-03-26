@@ -21,10 +21,6 @@ private slots:
 	void penWidth();
 	void about();
 
-	void on_actionMove_triggered();
-
-	void on_actionPaint_triggered();
-
 private:
 	Paper *paper;
 
