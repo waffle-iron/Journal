@@ -47,10 +47,20 @@ void MainWindow::about()
 
 void MainWindow::on_actionDraw_triggered()
 {
-	paper->setDrawing(true);
+	paper->setDrawing();
 }
 
 void MainWindow::on_actionMove_triggered()
 {
-	paper->setMoving(true);
+	paper->setMoving();
+}
+
+void MainWindow::on_actionText_triggered()
+{
+	paper->setEditingText();
+}
+
+void MainWindow::on_actionSelect_triggered()
+{
+	paper->setSelect();
 }

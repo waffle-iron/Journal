@@ -9,12 +9,24 @@
 #include <vector>
 #include <QGraphicsScene>
 #include <QGraphicsView>
+#include <QTextEdit>
+
+enum InteractionMode
+{
+	Drawing,
+	Selecting,
+	InsertingText,
+	EditingText
+};
 
 class Paper : public QGraphicsScene
 {
 	Q_OBJECT
 
 public:
+
+	InteractionMode mode;
+
 	Paper(QWidget *parent = 0);
 
 	void setPenColor(const QColor &newColor);
@@ -22,8 +34,10 @@ public:
 
 	QColor penColor() const { return myPenColor; }
 	int penWidth() const { return myPenWidth; }
-	void setMoving(bool isMoving);
-	void setDrawing(bool isDrawing);
+	void setMoving();
+	void setDrawing();
+	void setEditingText();
+	void setSelect();
 
 public slots:
 
@@ -36,12 +50,15 @@ protected:
 
 private:
 	void drawLineTo(const QPointF &endPoint);
+	void deselect();
+	void textChanged();
 
-	bool drawing;
-	bool moving;
+	bool inTheMiddleOfAStroke;
 	int myPenWidth;
+	QGraphicsItem* selectedItem;
+	QTextEdit* textEdit;
+	QGraphicsProxyWidget *proxyText;
 	QColor myPenColor;
-	QImage image;
 	QPointF lastPoint;
 	QPen myPen;
 	QPainterPath* currentStrokePath;

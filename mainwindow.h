@@ -22,8 +22,9 @@ private slots:
 	void about();
 
 	void on_actionDraw_triggered();
-
 	void on_actionMove_triggered();
+	void on_actionText_triggered();
+	void on_actionSelect_triggered();
 
 private:
 	Paper *paper;
