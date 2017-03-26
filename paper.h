@@ -22,6 +22,8 @@ public:
 
 	QColor penColor() const { return myPenColor; }
 	int penWidth() const { return myPenWidth; }
+	void setMoving(bool isMoving);
+	void setDrawing(bool isDrawing);
 
 public slots:
 
@@ -35,7 +37,8 @@ protected:
 private:
 	void drawLineTo(const QPointF &endPoint);
 
-	bool painting;
+	bool drawing;
+	bool moving;
 	int myPenWidth;
 	QColor myPenColor;
 	QImage image;

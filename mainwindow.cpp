@@ -44,3 +44,13 @@ void MainWindow::about()
 	QMessageBox::about(this, tr("About Scribble"),
 			tr("<p>The <b>Journal</b> app is a notes taking app inspired heavily by Microsoft OneNote.</p>"));
 }
+
+void MainWindow::on_actionDraw_triggered()
+{
+	paper->setDrawing(true);
+}
+
+void MainWindow::on_actionMove_triggered()
+{
+	paper->setMoving(true);
+}
