@@ -9,6 +9,9 @@ Paper::Paper(QWidget *parent) : QGraphicsScene(parent)
 	moving = false;
 	myPenWidth = 3;
 	myPenColor = Qt::black;
+	myPen = QPen(myPenColor, myPenWidth,
+				 Qt::SolidLine, Qt::RoundCap,
+				 Qt::RoundJoin);
 }
 
 void Paper::setPenColor(const QColor &newColor)
@@ -40,10 +43,13 @@ void Paper::mousePressEvent(QGraphicsSceneMouseEvent *event)
 	}
 	if (event->button() == Qt::LeftButton)
 	{
+		currentStrokePath = new QPainterPath(event->scenePos());
+		currentStrokeItem = addPath(*currentStrokePath);
+		currentStrokeItem->setPen(myPen);
+		currentStrokeItem->setFlag(QGraphicsItem::ItemIsMovable);
 		drawing = true;
 		lastPoint = event->scenePos();
 	}
-
 }
 
 void Paper::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
@@ -68,6 +74,7 @@ void Paper::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 	{
 		drawLineTo(event->scenePos());
 		drawing = false;
+		delete currentStrokePath;
 	}
 }
 
@@ -110,8 +117,6 @@ void Paper::dropEvent(QGraphicsSceneDragDropEvent *event)
 
 void Paper::drawLineTo(const QPointF &endPoint)
 {
-	addLine(lastPoint.x(), lastPoint.y(), endPoint.x(), endPoint.y(), QPen(myPenColor, myPenWidth,
-																		   Qt::SolidLine, Qt::RoundCap,
-																		   Qt::RoundJoin));
-	lastPoint = endPoint;
+	currentStrokePath->lineTo(endPoint);
+	currentStrokeItem->setPath(*currentStrokePath);
 }

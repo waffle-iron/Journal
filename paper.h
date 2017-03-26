@@ -43,6 +43,9 @@ private:
 	QColor myPenColor;
 	QImage image;
 	QPointF lastPoint;
+	QPen myPen;
+	QPainterPath* currentStrokePath;
+	QGraphicsPathItem* currentStrokeItem;
 };
 
 #endif
