@@ -10,10 +10,9 @@ MainWindow::MainWindow(QWidget *parent) :
 	ui->setupUi(this);
 	paper = new Paper();
 	ui->graphicsView->setScene(paper);
-	//setCentralWidget(paper);
+	ui->graphicsView->setSceneRect(QRectF(0, 0, 800, 600));
 
 	setWindowTitle(tr("Journal"));
-	resize(500, 500);
 }
 
 MainWindow::~MainWindow()
