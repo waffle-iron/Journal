@@ -100,7 +100,15 @@ void Paper::dropEvent(QGraphicsSceneDragDropEvent *event)
 		item = new QGraphicsPixmapItem(* new QPixmap(event->mimeData()->urls()[0].toLocalFile()));
 
 	else if(event->mimeData()->hasText())
-		item = new QGraphicsTextItem(event->mimeData()->text());
+	{
+		if (event->mimeData()->hasHtml())
+		{
+			item = new QGraphicsTextItem();
+			((QGraphicsTextItem *)item)->setHtml(event->mimeData()->html());
+		}
+		else
+			item = new QGraphicsSimpleTextItem(event->mimeData()->text());
+	}
 
 	else if(event->mimeData()->hasImage())
 	{
