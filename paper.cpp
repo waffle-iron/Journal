@@ -1,8 +1,5 @@
 #include <QtWidgets>
-#ifndef QT_NO_PRINTER
-#include <QPrinter>
-#include <QPrintDialog>
-#endif
+#include <iostream>
 
 #include "paper.h"
 
@@ -46,6 +43,30 @@ void Paper::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 		drawLineTo(event->scenePos());
 		painting = false;
 	}
+}
+
+void Paper::dragMoveEvent(QGraphicsSceneDragDropEvent *event)
+{
+
+}
+
+void Paper::dropEvent(QGraphicsSceneDragDropEvent *event)
+{
+//	for (QString mime : event->mimeData()->formats())
+//		std::cout << mime.toStdString() << std::endl;
+	QGraphicsItem* item;
+	if(event->mimeData()->hasUrls()) //TODO: make sure it's a photo and add support to all file types ever
+		item = new QGraphicsPixmapItem(* new QPixmap(event->mimeData()->urls()[0].toLocalFile()));
+	else if(event->mimeData()->hasText())
+		item = new QGraphicsTextItem(event->mimeData()->text());
+	else if(event->mimeData()->hasImage())
+	{
+		QImage image = qvariant_cast<QImage>(event->mimeData()->imageData());
+		item = new QGraphicsPixmapItem(QPixmap::fromImage(image));
+	}
+	else return;
+	item->setPos(event->scenePos());
+	addItem(item);
 }
 
 void Paper::drawLineTo(const QPointF &endPoint)

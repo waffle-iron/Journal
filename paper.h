@@ -29,6 +29,8 @@ protected:
 	void mousePressEvent(QGraphicsSceneMouseEvent *event) Q_DECL_OVERRIDE;
 	void mouseMoveEvent(QGraphicsSceneMouseEvent *event) Q_DECL_OVERRIDE;
 	void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) Q_DECL_OVERRIDE;
+	void dragMoveEvent(QGraphicsSceneDragDropEvent *event) Q_DECL_OVERRIDE;
+	void dropEvent(QGraphicsSceneDragDropEvent *event) Q_DECL_OVERRIDE;
 
 private:
 	void drawLineTo(const QPointF &endPoint);
