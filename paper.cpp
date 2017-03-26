@@ -89,26 +89,21 @@ void Paper::dropEvent(QGraphicsSceneDragDropEvent *event)
 //		std::cout << mime.toStdString() << std::endl;
 
 	if(moving)
-	{
 		QGraphicsScene::dropEvent(event);
-		return;
-	}
 
 	QGraphicsItem* item;
 
 	if(event->mimeData()->hasUrls()) //TODO: make sure it's a photo and add support to all file types ever
 		item = new QGraphicsPixmapItem(* new QPixmap(event->mimeData()->urls()[0].toLocalFile()));
 
-	else if(event->mimeData()->hasText())
+	else if (event->mimeData()->hasHtml())
 	{
-		if (event->mimeData()->hasHtml())
-		{
-			item = new QGraphicsTextItem();
-			((QGraphicsTextItem *)item)->setHtml(event->mimeData()->html());
-		}
-		else
-			item = new QGraphicsSimpleTextItem(event->mimeData()->text());
+		item = new QGraphicsTextItem();
+		((QGraphicsTextItem *)item)->setHtml(event->mimeData()->html());
 	}
+
+	else if(event->mimeData()->hasText())
+			item = new QGraphicsSimpleTextItem(event->mimeData()->text());
 
 	else if(event->mimeData()->hasImage())
 	{
